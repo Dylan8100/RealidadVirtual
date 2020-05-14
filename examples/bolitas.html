@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - materials - cubemap mipmaps</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="main.css">
+	</head>
+	<body>
+
+		<div id="container"></div>
+		<div id="info">
+			
+			
+		</div>
+
+		<script type="module">
+
+			import * as THREE from '../build/three.module.js';
+
+			import { OrbitControls } from './jsm/controls/OrbitControls.js';
+
+			import { OBJLoader } from './jsm/loaders/OBJLoader.js';
+
+			var container;
+
+			var camera, scene, renderer;
+
+			var mouseX = 0, mouseY = 0;
+
+			var windowHalfX = window.innerWidth / 2;
+			var windowHalfY = window.innerHeight / 2;
+
+			var cuerpo;
+			var orejas;
+			var cabello;
+			var buso;
+			var dientes;
+			var pantaloneta;
+			var gorro;
+			var ojos;
+			var zapatos;
+			var cejas;
+
+			init();
+			animate();
+
+			function init() {
+
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
+
+				camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 2000 );
+				camera.position.z = 280;
+
+				// scene
+
+				scene = new THREE.Scene();
+
+				var ambientLight = new THREE.AmbientLight( 0xcccccc, 0.4 );
+				scene.add( ambientLight );
+
+				var pointLight = new THREE.PointLight( 0xffffff, 0.8 );
+				camera.add( pointLight );
+				scene.add( camera );
+
+				// CARGAMOS EL MODELO
+
+				    ////cuerpo////
+
+				function loadModel() {
+
+					cuerpo.traverse( function ( child ) {
+
+						if ( child.isMesh ) child.material.map = texture;
+
+					} );
+
+					cuerpo.position.y = -120;
+					scene.add( cuerpo );
+
+
+					 //orejas//
+
+					 orejas.traverse( function ( child ) {
+
+                        if ( child.isMesh ) child.material.map = texture1;
+
+                    } );
+
+					orejas.position.y = -120;
+					scene.add( orejas );
+
+					//// cabello///
+
+					cabello.traverse( function ( child ) {
+
+                        if ( child.isMesh ) child.material.map = texture2;
+
+                    } );
+
+					cabello.position.y = -120;
+					scene.add( cabello );
+                        
+				    //GORRO
+					gorro.traverse( function ( child ) {
+
+                        if ( child.isMesh ) child.material.map = texture3;
+
+                    } );
+
+                    gorro.position.y = -120;
+                    scene.add( gorro );
+
+					//DIENTES
+                    dientes.traverse( function ( child ) {
+
+                        if ( child.isMesh ) child.material.map = texture4;
+
+                    } );
+
+                    dientes.position.y = -120;
+                    scene.add( dientes );
+		
+
+					//PANTALONETA
+                    pantaloneta.traverse( function ( child ) {
+
+                        if ( child.isMesh ) child.material.map = texture5;
+
+                    } );
+
+                    pantaloneta.position.y = -120;
+                    scene.add( pantaloneta );
+					//BUSO
+                    buso.traverse( function ( child ) {
+
+                        if ( child.isMesh ) child.material.map = texture6;
+
+                    } );
+
+                    buso.position.y = -120;
+                    scene.add( buso );
+					//OJOS
+	                ojos.traverse( function ( child ) {
+
+                        if ( child.isMesh ) child.material.map = texture7;
+
+                    } );
+
+                    ojos.position.y = -120;
+                    scene.add( ojos);
+					//ZAPATOS
+	                zapatos.traverse( function ( child ) {
+
+                        if ( child.isMesh ) child.material.map = texture8;
+
+                    } );
+
+                    zapatos.position.y = -120;
+                    scene.add( zapatos );	
+
+					//CEJAS//
+
+					cejas.traverse( function ( child ) {
+
+                        if ( child.isMesh ) child.material.map = texture9;
+
+                    } );
+
+                    cejas.position.y = -120;
+                    scene.add( cejas );
+
+
+				}
+
+
+
+                //////////////////////////////////////////precargar las texturas/////////////////////////////
+
+
+				//CUERPO//
+				var cuerpot = new THREE.LoadingManager( loadModel );
+
+				cuerpot.onProgress = function ( item, loaded, total ) {
+
+					console.log( item, loaded, total );
+
+				};
+
+				//OREJAS//
+                var orejast = new THREE.LoadingManager( loadModel );
+
+				orejast.onProgress = function ( item, loaded, total ) {
+
+					console.log( item, loaded, total );
+
+				};
+
+                //CABELLO//
+				var cabellot= new THREE.LoadingManager( loadModel );
+
+				cabellot.onProgress = function ( item, loaded, total ) {
+
+					console.log( item, loaded, total );
+
+				};
+
+				//GORRO//
+				var gorrot= new THREE.LoadingManager( loadModel );
+
+                gorrot.onProgress = function ( item, loaded, total ) {
+
+	                console.log( item, loaded, total );
+
+                };
+
+				// DIENTES//
+                var dientest= new THREE.LoadingManager( loadModel );
+
+                dientest.onProgress = function ( item, loaded, total ) {
+
+	                console.log( item, loaded, total );
+
+                };
+
+				//PANTALONETA//
+                var pantalonetat= new THREE.LoadingManager( loadModel );
+
+                pantalonetat.onProgress = function ( item, loaded, total ) {
+
+	                console.log( item, loaded, total );
+
+                };
+
+
+				//BUSO//
+                var busot= new THREE.LoadingManager( loadModel );
+
+                busot.onProgress = function ( item, loaded, total ) {
+
+	                console.log( item, loaded, total );
+
+                };
+
+				//OJOS//
+                var ojost= new THREE.LoadingManager( loadModel );
+
+                ojost.onProgress = function ( item, loaded, total ) {
+
+	                console.log( item, loaded, total );
+
+                };
+
+
+
+				//ZAPATOS//
+                var zapatost= new THREE.LoadingManager( loadModel );
+
+                zapatost.onProgress = function ( item, loaded, total ) {
+
+	                console.log( item, loaded, total );
+
+                };
+
+
+				//CEJAS//
+
+				var cejast= new THREE.LoadingManager( loadModel );
+
+                cejast.onProgress = function ( item, loaded, total ) {
+
+	                console.log( item, loaded, total );
+
+                };
+
+
+
+				/////////////////////////////////////// texturas//////////////////////////////////
+
+				var textureLoader = new THREE.TextureLoader( cuerpot );
+				var texture1Loader = new THREE.TextureLoader( orejast );
+				var texture2Loader = new THREE.TextureLoader( cabellot );
+				var texture3Loader = new THREE.TextureLoader( gorrot );
+				var texture4Loader = new THREE.TextureLoader( dientest );
+				var texture5Loader = new THREE.TextureLoader( pantalonetat );
+				var texture6Loader = new THREE.TextureLoader( busot );
+				var texture7Loader = new THREE.TextureLoader( ojost );
+				var texture8Loader = new THREE.TextureLoader( zapatost );
+				var texture9Loader = new THREE.TextureLoader( cejast );
+
+				var texture = textureLoader.load( 'textures/Channel_SkinCuerpob_Diffuse.jpg' );
+				var texture1 = texture1Loader.load( 'textures/Channel_Oreja_Diffuse.jpg' );
+				var texture2 = texture2Loader.load( 'textures/Channel_Cabello1_Diffuse.jpg' );
+				var texture3 = texture3Loader.load( 'textures/Channel_Gorro_Diffuse.jpg' );
+				var texture4 = texture4Loader.load( 'textures/Channel_Dientes_Diffuse.jpg' );
+				var texture5 = texture5Loader.load( 'textures/Channel_Pantaloneta_Diffuse.jpg' );
+				var texture6 = texture6Loader.load( 'textures/Channel_SkinbaseBuso_Diffuse.jpg' );
+				var texture7 = texture7Loader.load( 'textures/Channel_ojos1_Diffuse.jpg' );
+				var texture8 = texture8Loader.load( 'textures/Channel_zapatos_Diffuse.jpg' );
+				var texture9 = texture9Loader.load( 'textures/Channel_cejaD_Diffuse.jpg' );
+
+
+
+				// Cargamos el modelo
+
+				function onProgress( xhr ) {
+
+					if ( xhr.lengthComputable ) {
+
+						var percentComplete = xhr.loaded / xhr.total * 100;
+						console.log( 'model ' + Math.round( percentComplete, 2 ) + '% downloaded' );
+
+					}
+
+				}
+
+				function onError() {}
+
+				var loader = new OBJLoader(cuerpot);
+				var loader = new OBJLoader(orejast);
+				var loader = new OBJLoader(cabellot);
+				var loader = new OBJLoader(gorrot);
+				var loader = new OBJLoader(dientest);
+				var loader = new OBJLoader(pantalonetat);
+				var loader = new OBJLoader(busot);
+				var loader = new OBJLoader(ojost);
+				var loader = new OBJLoader(zapatost);
+				var loader = new OBJLoader(cejast);
+
+
+                //Cargar las texturas en el modelo //
+
+				loader.load( 'models/obj/male02/CUERPO.obj', function ( obj ) {	
+
+					cuerpo = obj;
+
+				}, onProgress, onError );
+				loader.load( 'models/obj/male02/OREJAS.obj', function ( obj ) {	
+
+					orejas = obj;
+
+				}, onProgress, onError );
+
+				loader.load( 'models/obj/male02/CABELLO.obj', function ( obj ) {	
+
+                     cabello = obj;
+
+				}, onProgress, onError );
+
+
+				loader.load( 'models/obj/male02/GORRO.obj', function ( obj ) {	
+
+                     gorro = obj;
+
+				}, onProgress, onError );
+
+				loader.load( 'models/obj/male02/DIENTES.obj', function ( obj ) {	
+
+                     dientes = obj;
+
+				}, onProgress, onError );
+
+
+				loader.load( 'models/obj/male02/PANTALONETA.obj', function ( obj ) {	
+
+                     pantaloneta = obj;
+
+				}, onProgress, onError );
+
+				loader.load( 'models/obj/male02/BUSO.obj', function ( obj ) {	
+
+                     buso = obj;
+
+				}, onProgress, onError );
+
+				loader.load( 'models/obj/male02/OJOS.obj', function ( obj ) {	
+
+                     ojos = obj;
+
+				}, onProgress, onError );
+
+				loader.load( 'models/obj/male02/ZAPATOS.obj', function ( obj ) {	
+
+                     zapatos = obj;
+
+				}, onProgress, onError );
+
+				loader.load( 'models/obj/male02/CEJAS.obj', function ( obj ) {	
+
+                     cejas = obj;
+
+				}, onProgress, onError );
+
+
+
+
+
+
+			
+
+
+				//renderer
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				container.appendChild( renderer.domElement );
+
+				//controls
+				var controls = new OrbitControls( camera, renderer.domElement );
+				controls.minPolarAngle = Math.PI / 4;
+				controls.maxPolarAngle = Math.PI / 1.5;
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+				renderer.render( scene, camera );
+
+			}
+
+		</script>
+
+	</body>
+</html>
